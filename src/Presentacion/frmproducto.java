@@ -7,11 +7,21 @@
 package Presentacion;
 
 import Datos.vproducto;
+import Logica.conexion;
 import Logica.fhabitacion;
 import Logica.fproducto;
+import java.io.File;
+import java.sql.Connection;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperDesignViewer;
+import net.sf.jasperreports.view.JasperViewer;
 /**
  *
  * @author CARLOS
@@ -114,6 +124,7 @@ public class frmproducto extends javax.swing.JInternalFrame {
         btnsalir = new javax.swing.JButton();
         lbltotalregistros = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
+        btnReporte = new javax.swing.JButton();
         jLabel12 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         txtidproducto = new javax.swing.JTextField();
@@ -195,7 +206,7 @@ public class frmproducto extends javax.swing.JInternalFrame {
                 btneliminarActionPerformed(evt);
             }
         });
-        jPanel2.add(btneliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 110, -1, -1));
+        jPanel2.add(btneliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 110, -1, -1));
 
         btnsalir.setBackground(new java.awt.Color(51, 51, 51));
         btnsalir.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
@@ -206,7 +217,7 @@ public class frmproducto extends javax.swing.JInternalFrame {
                 btnsalirActionPerformed(evt);
             }
         });
-        jPanel2.add(btnsalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 110, -1, -1));
+        jPanel2.add(btnsalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 110, -1, -1));
 
         lbltotalregistros.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
         lbltotalregistros.setText("Registros:");
@@ -216,6 +227,17 @@ public class frmproducto extends javax.swing.JInternalFrame {
         jLabel11.setForeground(new java.awt.Color(102, 0, 0));
         jLabel11.setText("Listado de Productos");
         jPanel2.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 30, -1, -1));
+
+        btnReporte.setBackground(new java.awt.Color(204, 255, 255));
+        btnReporte.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        btnReporte.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Files/Consultas.png"))); // NOI18N
+        btnReporte.setText("Reporte");
+        btnReporte.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReporteActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btnReporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 110, -1, -1));
 
         jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Files/fondo03.jpg"))); // NOI18N
         jPanel2.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 780, 620));
@@ -240,6 +262,11 @@ public class frmproducto extends javax.swing.JInternalFrame {
         txtnombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtnombreActionPerformed(evt);
+            }
+        });
+        txtnombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtnombreKeyTyped(evt);
             }
         });
         jPanel1.add(txtnombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 190, 290, 30));
@@ -269,6 +296,11 @@ public class frmproducto extends javax.swing.JInternalFrame {
         txtprecio_venta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtprecio_ventaActionPerformed(evt);
+            }
+        });
+        txtprecio_venta.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtprecio_ventaKeyTyped(evt);
             }
         });
         jPanel1.add(txtprecio_venta, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 460, 98, 30));
@@ -494,6 +526,70 @@ public class frmproducto extends javax.swing.JInternalFrame {
         this.dispose();
     }//GEN-LAST:event_btncancelarActionPerformed
 
+    private void txtprecio_ventaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtprecio_ventaKeyTyped
+          char C= evt.getKeyChar();
+     
+     if(Character.isLetter(C))
+     {
+         getToolkit().beep();
+         evt.consume();
+         JOptionPane.showMessageDialog(this, "Ingrese solo numeros");
+         txtprecio_venta.setCursor(null);
+     }
+     else if((int)evt.getKeyChar()>32 && (int)evt.getKeyChar()<=45
+             ||(int)evt.getKeyChar()>=58 && (int)evt.getKeyChar()<=64
+             || (int)evt.getKeyChar()>=91 && (int)evt.getKeyChar()<=96
+             || (int)evt.getKeyChar()>=123 && (int)evt.getKeyChar()<=255)
+    {
+         getToolkit().beep();
+         evt.consume();
+         JOptionPane.showMessageDialog(this, "Ingrese solo numeros");
+         txtprecio_venta.setCursor(null);
+     }
+    }//GEN-LAST:event_txtprecio_ventaKeyTyped
+
+    private void txtnombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtnombreKeyTyped
+        char C= evt.getKeyChar();
+     
+     if(Character.isDigit(C))
+     {
+         getToolkit().beep();
+         evt.consume();
+         JOptionPane.showMessageDialog(this, "Ingrese solo letras");
+         txtnombre.setCursor(null);
+     }
+     else if((int)evt.getKeyChar()>32 && (int)evt.getKeyChar()<=47
+             ||(int)evt.getKeyChar()>=58 && (int)evt.getKeyChar()<=64
+             || (int)evt.getKeyChar()>=91 && (int)evt.getKeyChar()<=96
+             || (int)evt.getKeyChar()>=123 && (int)evt.getKeyChar()<=255)
+    {
+         getToolkit().beep();
+         evt.consume();
+         JOptionPane.showMessageDialog(this, "Ingrese solo letras");
+         txtnombre.setCursor(null);
+     }
+    }//GEN-LAST:event_txtnombreKeyTyped
+    private Connection connection = new conexion().conectar();
+    
+    private void btnReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReporteActionPerformed
+        // TODO add your handling code here:
+        Map p= new HashMap();
+        JasperReport report;
+        JasperPrint print;
+
+        try {
+            report=JasperCompileManager.compileReport(new File("").getAbsolutePath() +
+                "/src/Reportes/rpproducto.jrxml");
+            print = JasperFillManager.fillReport(report, p, connection);
+            JasperViewer view = new JasperViewer(print, false);
+            view.setTitle("Reporte de Productos");
+            view.setVisible(true);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_btnReporteActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -530,6 +626,7 @@ public class frmproducto extends javax.swing.JInternalFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnReporte;
     private javax.swing.JButton btnbuscar;
     private javax.swing.JButton btncancelar;
     private javax.swing.JButton btneliminar;

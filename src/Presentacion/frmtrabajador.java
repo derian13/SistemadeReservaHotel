@@ -6,11 +6,24 @@
 package Presentacion;
 import Datos.vcliente;
 import Datos.vtrabajador;
+import Logica.conexion;
 import Logica.fcliente;
 import Logica.fproducto;
 import Logica.ftrabajador;
+import java.io.File;
+import java.sql.Connection;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperDesignViewer;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -174,9 +187,10 @@ public class frmtrabajador extends javax.swing.JInternalFrame {
         tablalistado = new javax.swing.JTable();
         lbltotalregistros = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
+        btnReporte = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -206,6 +220,11 @@ public class frmtrabajador extends javax.swing.JInternalFrame {
                 txtnombreActionPerformed(evt);
             }
         });
+        txtnombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtnombreKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtnombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 70, 240, 25));
 
         jLabel4.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
@@ -221,6 +240,11 @@ public class frmtrabajador extends javax.swing.JInternalFrame {
                 txtapaternoActionPerformed(evt);
             }
         });
+        txtapaterno.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtapaternoKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtapaterno, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 110, 140, 25));
 
         jLabel5.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
@@ -234,6 +258,11 @@ public class frmtrabajador extends javax.swing.JInternalFrame {
         txtamaterno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtamaternoActionPerformed(evt);
+            }
+        });
+        txtamaterno.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtamaternoKeyTyped(evt);
             }
         });
         jPanel1.add(txtamaterno, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 150, 140, 25));
@@ -267,6 +296,11 @@ public class frmtrabajador extends javax.swing.JInternalFrame {
                 txtnum_documentoActionPerformed(evt);
             }
         });
+        txtnum_documento.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtnum_documentoKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtnum_documento, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 230, 140, 25));
 
         jLabel8.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
@@ -297,6 +331,11 @@ public class frmtrabajador extends javax.swing.JInternalFrame {
                 txttelefonoActionPerformed(evt);
             }
         });
+        txttelefono.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txttelefonoKeyTyped(evt);
+            }
+        });
         jPanel1.add(txttelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 310, 140, 25));
 
         jLabel10.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
@@ -307,6 +346,11 @@ public class frmtrabajador extends javax.swing.JInternalFrame {
         txtemail.setBackground(new java.awt.Color(235, 227, 227));
         txtemail.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
         txtemail.setForeground(new java.awt.Color(0, 0, 51));
+        txtemail.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtemailFocusLost(evt);
+            }
+        });
         txtemail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtemailActionPerformed(evt);
@@ -325,6 +369,11 @@ public class frmtrabajador extends javax.swing.JInternalFrame {
         txtsueldo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtsueldoActionPerformed(evt);
+            }
+        });
+        txtsueldo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtsueldoKeyTyped(evt);
             }
         });
         jPanel1.add(txtsueldo, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 390, 140, 25));
@@ -459,7 +508,7 @@ public class frmtrabajador extends javax.swing.JInternalFrame {
                 btneliminarActionPerformed(evt);
             }
         });
-        jPanel2.add(btneliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 100, -1, -1));
+        jPanel2.add(btneliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 100, -1, -1));
 
         btnsalir.setBackground(new java.awt.Color(204, 255, 255));
         btnsalir.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
@@ -470,7 +519,7 @@ public class frmtrabajador extends javax.swing.JInternalFrame {
                 btnsalirActionPerformed(evt);
             }
         });
-        jPanel2.add(btnsalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 100, -1, -1));
+        jPanel2.add(btnsalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 100, -1, -1));
         jPanel2.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 60, -1, -1));
 
         tablalistado.setAutoCreateRowSorter(true);
@@ -503,6 +552,17 @@ public class frmtrabajador extends javax.swing.JInternalFrame {
 
         jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Files/icon.png"))); // NOI18N
         jPanel2.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 40, -1, -1));
+
+        btnReporte.setBackground(new java.awt.Color(204, 255, 255));
+        btnReporte.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        btnReporte.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Files/Consultas.png"))); // NOI18N
+        btnReporte.setText("Reporte");
+        btnReporte.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReporteActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btnReporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 100, -1, -1));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Files/fondo03.jpg"))); // NOI18N
         jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 835, 630));
@@ -596,40 +656,52 @@ public class frmtrabajador extends javax.swing.JInternalFrame {
     private void btnguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarActionPerformed
         // TODO add your handling code here:
         if (txtnombre.getText().length() == 0) {
-            JOptionPane.showConfirmDialog(rootPane, "Debes ingresar un Nombre para el Trabajador");
+            JOptionPane.showMessageDialog(null,"Debe ingresar un nombre para el trabajador","Validar Nombre",JOptionPane.INFORMATION_MESSAGE);
             txtnombre.requestFocus();
             return;
         }
         if (txtapaterno.getText().length() == 0) {
-            JOptionPane.showConfirmDialog(rootPane, "Debes ingresar un apellido para el Trabajador");
+            JOptionPane.showMessageDialog(null,"Debe ingresar un apellido para el trabajador","Validar Apellido",JOptionPane.INFORMATION_MESSAGE);
             txtapaterno.requestFocus();
             return;
         }
 
         if (txtamaterno.getText().length() == 0) {
-            JOptionPane.showConfirmDialog(rootPane, "Debes ingresar un apellido para el Trabajador");
+            JOptionPane.showMessageDialog(null,"Debe ingresar un apellido para el trabajador","Validar Apellido",JOptionPane.INFORMATION_MESSAGE);
             txtamaterno.requestFocus();
             return;
         }
 
-        if (txtnum_documento.getText().length() == 0) {
-            JOptionPane.showConfirmDialog(rootPane, "Debes ingresar un Número de Doc para el Trabajador");
+        if (txtnum_documento.getText().length() == 9 || txtnum_documento.getText().length() == 10 || txtnum_documento.getText().length() == 7 ||txtnum_documento.getText().length() == 0)  {
+            JOptionPane.showMessageDialog(null,"DNI Incorrecto","Validar DNI",JOptionPane.INFORMATION_MESSAGE);
             txtnum_documento.requestFocus();
+            return;
+        }
+        
+        if (txtdireccion.getText().length() == 0) {
+            JOptionPane.showMessageDialog(null,"Debe ingresar una direccion para el trabajador","Validar Direccion",JOptionPane.INFORMATION_MESSAGE);
+            txtdireccion.requestFocus();
+            return;
+        }
+        
+        if (txtemail.getText().length() == 0) {
+            JOptionPane.showMessageDialog(null,"Debe ingresar un email para el trabajador","Validar Email",JOptionPane.INFORMATION_MESSAGE);
+            txtemail.requestFocus();
             return;
         }
 
         if (txtsueldo.getText().length() == 0) {
-            JOptionPane.showConfirmDialog(rootPane, "Debes ingresar un Sueldo para el trabajador");
+            JOptionPane.showMessageDialog(null,"Debe ingresar un sueldo para el trabajador","Validar Sueldo",JOptionPane.INFORMATION_MESSAGE);
             txtsueldo.requestFocus();
             return;
         }
         if (txtlogin.getText().length() == 0) {
-            JOptionPane.showConfirmDialog(rootPane, "Debes ingresar un login para el trabajador");
+            JOptionPane.showMessageDialog(null,"Debe ingresar un login para el trabajador","Validar Login",JOptionPane.INFORMATION_MESSAGE);
             txtlogin.requestFocus();
             return;
         }
         if (txtpassword.getText().length() == 0) {
-            JOptionPane.showConfirmDialog(rootPane, "Debes ingresar un password para el trabajador");
+            JOptionPane.showMessageDialog(null,"Debe ingresar un password para el trabajador","Validar Password",JOptionPane.INFORMATION_MESSAGE);
             txtpassword.requestFocus();
             return;
         }
@@ -739,6 +811,186 @@ public class frmtrabajador extends javax.swing.JInternalFrame {
         cboestado.setSelectedItem(tablalistado.getValueAt(fila, 13).toString());
     }//GEN-LAST:event_tablalistadoMouseClicked
 
+    private void txtnombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtnombreKeyTyped
+        char C= evt.getKeyChar();
+     
+     if(Character.isDigit(C))
+     {
+         getToolkit().beep();
+         evt.consume();
+         JOptionPane.showMessageDialog(this, "Ingrese solo letras");
+         txtnombre.setCursor(null);
+     }
+     else if((int)evt.getKeyChar()>32 && (int)evt.getKeyChar()<=47
+             ||(int)evt.getKeyChar()>=58 && (int)evt.getKeyChar()<=64
+             || (int)evt.getKeyChar()>=91 && (int)evt.getKeyChar()<=96
+             || (int)evt.getKeyChar()>=123 && (int)evt.getKeyChar()<=255)
+    {
+         getToolkit().beep();
+         evt.consume();
+         JOptionPane.showMessageDialog(this, "Ingrese solo letras");
+         txtnombre.setCursor(null);
+     }
+    }//GEN-LAST:event_txtnombreKeyTyped
+
+    private void txtapaternoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtapaternoKeyTyped
+        char C= evt.getKeyChar();
+     
+     if(Character.isDigit(C))
+     {
+         getToolkit().beep();
+         evt.consume();
+         JOptionPane.showMessageDialog(this, "Ingrese solo letras");
+         txtapaterno.setCursor(null);
+     }
+     else if((int)evt.getKeyChar()>32 && (int)evt.getKeyChar()<=47
+             ||(int)evt.getKeyChar()>=58 && (int)evt.getKeyChar()<=64
+             || (int)evt.getKeyChar()>=91 && (int)evt.getKeyChar()<=96
+             || (int)evt.getKeyChar()>=123 && (int)evt.getKeyChar()<=255)
+    {
+         getToolkit().beep();
+         evt.consume();
+         JOptionPane.showMessageDialog(this, "Ingrese solo letras");
+         txtapaterno.setCursor(null);
+     }
+    }//GEN-LAST:event_txtapaternoKeyTyped
+
+    private void txtamaternoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtamaternoKeyTyped
+        char C= evt.getKeyChar();
+     
+     if(Character.isDigit(C))
+     {
+         getToolkit().beep();
+         evt.consume();
+         JOptionPane.showMessageDialog(this, "Ingrese solo letras");
+         txtamaterno.setCursor(null);
+     }
+     else if((int)evt.getKeyChar()>32 && (int)evt.getKeyChar()<=47
+             ||(int)evt.getKeyChar()>=58 && (int)evt.getKeyChar()<=64
+             || (int)evt.getKeyChar()>=91 && (int)evt.getKeyChar()<=96
+             || (int)evt.getKeyChar()>=123 && (int)evt.getKeyChar()<=255)
+    {
+         getToolkit().beep();
+         evt.consume();
+         JOptionPane.showMessageDialog(this, "Ingrese solo letras");
+         txtamaterno.setCursor(null);
+     }
+    }//GEN-LAST:event_txtamaternoKeyTyped
+
+    private void txtnum_documentoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtnum_documentoKeyTyped
+         char C= evt.getKeyChar();
+     
+     if(Character.isLetter(C))
+     {
+         getToolkit().beep();
+         evt.consume();
+         JOptionPane.showMessageDialog(this, "Ingrese solo numeros");
+         txtnum_documento.setCursor(null);
+     }
+     else if((int)evt.getKeyChar()>32 && (int)evt.getKeyChar()<=47
+             ||(int)evt.getKeyChar()>=58 && (int)evt.getKeyChar()<=64
+             || (int)evt.getKeyChar()>=91 && (int)evt.getKeyChar()<=96
+             || (int)evt.getKeyChar()>=123 && (int)evt.getKeyChar()<=255)
+    {
+         getToolkit().beep();
+         evt.consume();
+         JOptionPane.showMessageDialog(this, "Ingrese solo numeros");
+         txtnum_documento.setCursor(null);
+     }
+    }//GEN-LAST:event_txtnum_documentoKeyTyped
+
+    private void txttelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txttelefonoKeyTyped
+         char C= evt.getKeyChar();
+     
+     if(Character.isLetter(C))
+     {
+         getToolkit().beep();
+         evt.consume();
+         JOptionPane.showMessageDialog(this, "Ingrese solo numeros");
+         txttelefono.setCursor(null);
+     }
+     else if((int)evt.getKeyChar()>32 && (int)evt.getKeyChar()<=47
+             ||(int)evt.getKeyChar()>=58 && (int)evt.getKeyChar()<=64
+             || (int)evt.getKeyChar()>=91 && (int)evt.getKeyChar()<=96
+             || (int)evt.getKeyChar()>=123 && (int)evt.getKeyChar()<=255)
+    {
+         getToolkit().beep();
+         evt.consume();
+         JOptionPane.showMessageDialog(this, "Ingrese solo numeros");
+         txttelefono.setCursor(null);
+     }
+    }//GEN-LAST:event_txttelefonoKeyTyped
+
+    private void txtsueldoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtsueldoKeyTyped
+        char C= evt.getKeyChar();
+     
+     if(Character.isLetter(C))
+     {
+         getToolkit().beep();
+         evt.consume();
+         JOptionPane.showMessageDialog(this, "Ingrese solo numeros");
+         txtsueldo.setCursor(null);
+     }
+     else if((int)evt.getKeyChar()>32 && (int)evt.getKeyChar()<=45
+             ||(int)evt.getKeyChar()>=58 && (int)evt.getKeyChar()<=64
+             || (int)evt.getKeyChar()>=91 && (int)evt.getKeyChar()<=96
+             || (int)evt.getKeyChar()>=123 && (int)evt.getKeyChar()<=255)
+    {
+         getToolkit().beep();
+         evt.consume();
+         JOptionPane.showMessageDialog(this, "Ingrese solo numeros");
+         txtsueldo.setCursor(null);
+     }
+    }//GEN-LAST:event_txtsueldoKeyTyped
+
+    public boolean isEmail(String correo){
+      
+        Pattern pat = null;
+        Matcher mat = null;
+        pat = Pattern.compile("^[\\w\\-\\_\\+]+(\\.[\\w\\-\\_]+)*@([A-Za-z0-9-]+\\.)+[A-Za-z]{2,4}$");
+        mat = pat.matcher(correo);
+        if(mat.find()){
+        
+            return true;
+        }else{
+        
+            return false;
+        }
+    }
+    
+    private void txtemailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtemailFocusLost
+        
+        if(isEmail(txtemail.getText())){
+            
+        }else {
+        
+            JOptionPane.showMessageDialog(null,"Email incorrecto","Validar email"
+                    ,JOptionPane.INFORMATION_MESSAGE);
+            txtemail.requestFocus();
+        }
+    }//GEN-LAST:event_txtemailFocusLost
+
+    private Connection connection = new conexion().conectar();
+    
+    private void btnReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReporteActionPerformed
+        // TODO add your handling code here:
+        Map p= new HashMap();
+        JasperReport report;
+        JasperPrint print;
+
+        try {
+            report=JasperCompileManager.compileReport(new File("").getAbsolutePath() +
+                "/src/Reportes/rptrabajador.jrxml");
+            print = JasperFillManager.fillReport(report, p, connection);
+            JasperViewer view = new JasperViewer(print, false);
+            view.setTitle("Reporte de Trabajadores");
+            view.setVisible(true);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_btnReporteActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -775,6 +1027,7 @@ public class frmtrabajador extends javax.swing.JInternalFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnReporte;
     private javax.swing.JButton btnbuscar;
     private javax.swing.JButton btncancelar;
     private javax.swing.JButton btneliminar;

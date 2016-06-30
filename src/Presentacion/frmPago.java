@@ -125,8 +125,8 @@ public class frmPago extends javax.swing.JInternalFrame {
         txtnum_comprobante.setEnabled(true);
         cbotipo_comprobante.setEnabled(true);
         txtigv.setEnabled(true);
-        txttotal_pago.setEnabled(true);
-        txttotalreserva.setEnabled(true);
+        txttotal_pago.setEnabled(false);
+        txttotalreserva.setEnabled(false);
         dcfecha_emision.setEnabled(true);
         dcfecha_pago.setEnabled(true);
         
@@ -264,6 +264,11 @@ public class frmPago extends javax.swing.JInternalFrame {
                 txtnum_comprobanteActionPerformed(evt);
             }
         });
+        txtnum_comprobante.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtnum_comprobanteKeyTyped(evt);
+            }
+        });
         txttotal_reserva.add(txtnum_comprobante, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 290, 98, -1));
 
         jLabel7.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
@@ -352,6 +357,11 @@ public class frmPago extends javax.swing.JInternalFrame {
         txtigv.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtigvActionPerformed(evt);
+            }
+        });
+        txtigv.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtigvKeyTyped(evt);
             }
         });
         txttotal_reserva.add(txtigv, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 330, 98, -1));
@@ -750,6 +760,50 @@ public class frmPago extends javax.swing.JInternalFrame {
         }
       }
     }//GEN-LAST:event_btnImprimirComprobanteConsumoActionPerformed
+
+    private void txtnum_comprobanteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtnum_comprobanteKeyTyped
+          char C= evt.getKeyChar();
+     
+     if(Character.isLetter(C))
+     {
+         getToolkit().beep();
+         evt.consume();
+         JOptionPane.showMessageDialog(this, "Ingrese solo numeros");
+         txtnum_comprobante.setCursor(null);
+     }
+     else if((int)evt.getKeyChar()>32 && (int)evt.getKeyChar()<45
+             ||(int)evt.getKeyChar()>=58 && (int)evt.getKeyChar()<=64
+             || (int)evt.getKeyChar()>=91 && (int)evt.getKeyChar()<=96
+             || (int)evt.getKeyChar()>=123 && (int)evt.getKeyChar()<=255)
+    {
+         getToolkit().beep();
+         evt.consume();
+         JOptionPane.showMessageDialog(this, "Ingrese solo numeros");
+         txtnum_comprobante.setCursor(null);
+     }
+    }//GEN-LAST:event_txtnum_comprobanteKeyTyped
+
+    private void txtigvKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtigvKeyTyped
+          char C= evt.getKeyChar();
+     
+     if(Character.isLetter(C))
+     {
+         getToolkit().beep();
+         evt.consume();
+         JOptionPane.showMessageDialog(this, "Ingrese solo numeros");
+         txtigv.setCursor(null);
+     }
+     else if((int)evt.getKeyChar()>32 && (int)evt.getKeyChar()<=45
+             ||(int)evt.getKeyChar()>=58 && (int)evt.getKeyChar()<=64
+             || (int)evt.getKeyChar()>=91 && (int)evt.getKeyChar()<=96
+             || (int)evt.getKeyChar()>=123 && (int)evt.getKeyChar()<=255)
+    {
+         getToolkit().beep();
+         evt.consume();
+         JOptionPane.showMessageDialog(this, "Ingrese solo numeros");
+         txtigv.setCursor(null);
+     }
+    }//GEN-LAST:event_txtigvKeyTyped
 
     /**
      * @param args the command line arguments

@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rptcomprobante" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c2b62622-778f-4306-b6e0-385c8577f9ca">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="6"/>
-	<property name="ireport.y" value="224"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="idpago" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
@@ -45,10 +45,6 @@ FROM
 	</background>
 	<title>
 		<band height="141" splitType="Stretch">
-			<image>
-				<reportElement x="0" y="0" width="228" height="105" uuid="6b8abba2-a061-4dbf-a5a2-aea7b2f13f35"/>
-				<imageExpression><![CDATA["C:\\Users\\Edu\\Documents\\NetBeansProjects\\sistemadereserva\\src\\Files\\paraiso.jpg"]]></imageExpression>
-			</image>
 			<staticText>
 				<reportElement x="228" y="31" width="169" height="34" forecolor="#FF3333" uuid="5e4e4a60-66b0-43b9-8a9b-fccd4bbb166d"/>
 				<textElement>
@@ -91,6 +87,10 @@ FROM
 				</textElement>
 				<textFieldExpression><![CDATA[$F{pago_num_comprobante}]]></textFieldExpression>
 			</textField>
+			<image>
+				<reportElement x="0" y="0" width="228" height="139" uuid="d4d3693b-8337-40ad-8140-97d5678da1f2"/>
+				<imageExpression><![CDATA["C:\\Users\\Edu\\Documents\\NetBeansProjects\\sistemadereserva\\src\\Files\\paraiso.jpg"]]></imageExpression>
+			</image>
 		</band>
 	</title>
 	<pageHeader>

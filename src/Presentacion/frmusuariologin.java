@@ -68,6 +68,11 @@ public class frmusuariologin extends javax.swing.JFrame {
         btnsalir.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
         btnsalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Files/cancelar.png"))); // NOI18N
         btnsalir.setText("Salir");
+        btnsalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnsalirActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnsalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 280, 120, -1));
 
         jLabel2.setFont(new java.awt.Font("Comic Sans MS", 1, 36)); // NOI18N
@@ -176,6 +181,10 @@ public class frmusuariologin extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_btningresarActionPerformed
+
+    private void btnsalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsalirActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnsalirActionPerformed
 
     /**
      * @param args the command line arguments

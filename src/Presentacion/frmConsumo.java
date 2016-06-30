@@ -62,7 +62,8 @@ public class frmConsumo extends javax.swing.JInternalFrame {
         btnguardar.setEnabled(false);
         btncancelar.setEnabled(false);
         btneliminar.setEnabled(false);
-
+        btnbuscarproducto.setEnabled(false);
+        
         txtidconsumo.setText("");
         txtprecio_venta.setText("");
         txtidproducto.setText("");
@@ -86,6 +87,8 @@ public class frmConsumo extends javax.swing.JInternalFrame {
         btnguardar.setEnabled(true);
         btncancelar.setEnabled(true);
         btneliminar.setEnabled(true);
+        btnbuscarproducto.setEnabled(true);
+        
 
         txtidconsumo.setText("");
         txtprecio_venta.setText("");
@@ -125,7 +128,6 @@ public class frmConsumo extends javax.swing.JInternalFrame {
         txtidreserva = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        txtprecio_venta = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         cboesado = new javax.swing.JComboBox();
         btnnuevo = new javax.swing.JButton();
@@ -134,8 +136,9 @@ public class frmConsumo extends javax.swing.JInternalFrame {
         txtcliente = new javax.swing.JTextField();
         txtidproducto = new javax.swing.JTextField();
         txtproducto = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
         txtcantidad = new javax.swing.JTextField();
+        txtprecio_venta = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         btnbuscarproducto = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
@@ -183,16 +186,6 @@ public class frmConsumo extends javax.swing.JInternalFrame {
         jLabel6.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
         jLabel6.setText("Precio Venta:");
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 330, -1, -1));
-
-        txtprecio_venta.setBackground(new java.awt.Color(235, 227, 227));
-        txtprecio_venta.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
-        txtprecio_venta.setForeground(new java.awt.Color(0, 0, 51));
-        txtprecio_venta.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtprecio_ventaActionPerformed(evt);
-            }
-        });
-        jPanel1.add(txtprecio_venta, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 320, 98, 30));
 
         jLabel7.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
         jLabel7.setText("Estado:");
@@ -260,11 +253,7 @@ public class frmConsumo extends javax.swing.JInternalFrame {
         txtproducto.setBackground(new java.awt.Color(235, 227, 227));
         txtproducto.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
         txtproducto.setForeground(new java.awt.Color(0, 0, 51));
-        jPanel1.add(txtproducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 320, 149, 30));
-
-        jLabel5.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
-        jLabel5.setText("Cantidad:");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, -1, -1));
+        jPanel1.add(txtproducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 220, 149, 30));
 
         txtcantidad.setBackground(new java.awt.Color(235, 227, 227));
         txtcantidad.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
@@ -274,7 +263,31 @@ public class frmConsumo extends javax.swing.JInternalFrame {
                 txtcantidadActionPerformed(evt);
             }
         });
+        txtcantidad.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtcantidadKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtcantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 270, 74, 30));
+
+        txtprecio_venta.setBackground(new java.awt.Color(235, 227, 227));
+        txtprecio_venta.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        txtprecio_venta.setForeground(new java.awt.Color(0, 0, 51));
+        txtprecio_venta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtprecio_ventaActionPerformed(evt);
+            }
+        });
+        txtprecio_venta.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtprecio_ventaKeyTyped(evt);
+            }
+        });
+        jPanel1.add(txtprecio_venta, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 320, 98, 30));
+
+        jLabel5.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        jLabel5.setText("Cantidad:");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("Comic Sans MS", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(102, 0, 0));
@@ -287,7 +300,7 @@ public class frmConsumo extends javax.swing.JInternalFrame {
                 btnbuscarproductoActionPerformed(evt);
             }
         });
-        jPanel1.add(btnbuscarproducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 170, 60, -1));
+        jPanel1.add(btnbuscarproducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 220, 60, -1));
 
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Files/fondo03.jpg"))); // NOI18N
         jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 450, 550));
@@ -513,6 +526,50 @@ public class frmConsumo extends javax.swing.JInternalFrame {
         form.setVisible(true);
         
     }//GEN-LAST:event_btnbuscarproductoActionPerformed
+
+    private void txtcantidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtcantidadKeyTyped
+          char C= evt.getKeyChar();
+     
+     if(Character.isLetter(C))
+     {
+         getToolkit().beep();
+         evt.consume();
+         JOptionPane.showMessageDialog(this, "Ingrese solo numeros");
+         txtcantidad.setCursor(null);
+     }
+     else if((int)evt.getKeyChar()>32 && (int)evt.getKeyChar()<=47
+             ||(int)evt.getKeyChar()>=58 && (int)evt.getKeyChar()<=64
+             || (int)evt.getKeyChar()>=91 && (int)evt.getKeyChar()<=96
+             || (int)evt.getKeyChar()>=123 && (int)evt.getKeyChar()<=255)
+    {
+         getToolkit().beep();
+         evt.consume();
+         JOptionPane.showMessageDialog(this, "Ingrese solo numeros");
+         txtcantidad.setCursor(null);
+     }
+    }//GEN-LAST:event_txtcantidadKeyTyped
+
+    private void txtprecio_ventaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtprecio_ventaKeyTyped
+        char C= evt.getKeyChar();
+     
+     if(Character.isLetter(C))
+     {
+         getToolkit().beep();
+         evt.consume();
+         JOptionPane.showMessageDialog(this, "Ingrese solo numeros");
+         txtprecio_venta.setCursor(null);
+     }
+     else if((int)evt.getKeyChar()>32 && (int)evt.getKeyChar()<=45
+             ||(int)evt.getKeyChar()>=58 && (int)evt.getKeyChar()<=64
+             || (int)evt.getKeyChar()>=91 && (int)evt.getKeyChar()<=96
+             || (int)evt.getKeyChar()>=123 && (int)evt.getKeyChar()<=255)
+    {
+         getToolkit().beep();
+         evt.consume();
+         JOptionPane.showMessageDialog(this, "Ingrese solo numeros");
+         txtprecio_venta.setCursor(null);
+     }
+    }//GEN-LAST:event_txtprecio_ventaKeyTyped
 
     /**
      * @param args the command line arguments

@@ -213,6 +213,11 @@ public class frmhabitacion extends javax.swing.JInternalFrame {
                 txtnumeroActionPerformed(evt);
             }
         });
+        txtnumero.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtnumeroKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtnumero, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 90, 120, 30));
 
         txtprecio_diario.setBackground(new java.awt.Color(235, 227, 227));
@@ -221,6 +226,11 @@ public class frmhabitacion extends javax.swing.JInternalFrame {
         txtprecio_diario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtprecio_diarioActionPerformed(evt);
+            }
+        });
+        txtprecio_diario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtprecio_diarioKeyTyped(evt);
             }
         });
         jPanel1.add(txtprecio_diario, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 360, 120, 30));
@@ -613,6 +623,50 @@ public class frmhabitacion extends javax.swing.JInternalFrame {
             e.printStackTrace();
         }
     }//GEN-LAST:event_btnReporteActionPerformed
+
+    private void txtprecio_diarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtprecio_diarioKeyTyped
+          char C= evt.getKeyChar();
+     
+     if(Character.isLetter(C))
+     {
+         getToolkit().beep();
+         evt.consume();
+         JOptionPane.showMessageDialog(this, "Ingrese solo numeros");
+         txtprecio_diario.setCursor(null);
+     }
+     else if((int)evt.getKeyChar()>32 && (int)evt.getKeyChar()<=45
+             ||(int)evt.getKeyChar()>=58 && (int)evt.getKeyChar()<=64
+             || (int)evt.getKeyChar()>=91 && (int)evt.getKeyChar()<=96
+             || (int)evt.getKeyChar()>=123 && (int)evt.getKeyChar()<=255)
+    {
+         getToolkit().beep();
+         evt.consume();
+         JOptionPane.showMessageDialog(this, "Ingrese solo numeros");
+         txtprecio_diario.setCursor(null);
+     }
+    }//GEN-LAST:event_txtprecio_diarioKeyTyped
+
+    private void txtnumeroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtnumeroKeyTyped
+          char C= evt.getKeyChar();
+     
+     if(Character.isLetter(C))
+     {
+         getToolkit().beep();
+         evt.consume();
+         JOptionPane.showMessageDialog(this, "Ingrese solo numeros");
+         txtnumero.setCursor(null);
+     }
+     else if((int)evt.getKeyChar()>32 && (int)evt.getKeyChar()<=47
+             ||(int)evt.getKeyChar()>=58 && (int)evt.getKeyChar()<=64
+             || (int)evt.getKeyChar()>=91 && (int)evt.getKeyChar()<=96
+             || (int)evt.getKeyChar()>=123 && (int)evt.getKeyChar()<=255)
+    {
+         getToolkit().beep();
+         evt.consume();
+         JOptionPane.showMessageDialog(this, "Ingrese solo numeros");
+         txtnumero.setCursor(null);
+     }
+    }//GEN-LAST:event_txtnumeroKeyTyped
  
     /**
      * @param args the command line arguments

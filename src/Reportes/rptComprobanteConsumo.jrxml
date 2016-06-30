@@ -115,7 +115,7 @@ where pago.`idpago`=$P{idpago}]]>
 				<textFieldExpression><![CDATA[$F{pago_num_comprobante}]]></textFieldExpression>
 			</textField>
 			<image>
-				<reportElement x="0" y="0" width="196" height="113" uuid="7b65e298-5119-40b8-8899-50dc44d84eea"/>
+				<reportElement x="0" y="0" width="196" height="113" uuid="c4e09ece-7acb-4b6c-b1f1-ed54b1ab1e68"/>
 				<imageExpression><![CDATA["C:\\Users\\Edu\\Documents\\NetBeansProjects\\sistemadereserva\\src\\Files\\paraiso.jpg"]]></imageExpression>
 			</image>
 		</band>

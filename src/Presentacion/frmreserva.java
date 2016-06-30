@@ -243,6 +243,11 @@ public class frmreserva extends javax.swing.JInternalFrame {
                 txtcosto_alojamientoActionPerformed(evt);
             }
         });
+        txtcosto_alojamiento.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtcosto_alojamientoKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtcosto_alojamiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(211, 476, 98, -1));
 
         jLabel7.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
@@ -773,6 +778,28 @@ public class frmreserva extends javax.swing.JInternalFrame {
         
         
     }//GEN-LAST:event_btnrealizarpagosActionPerformed
+
+    private void txtcosto_alojamientoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtcosto_alojamientoKeyTyped
+          char C= evt.getKeyChar();
+     
+     if(Character.isLetter(C))
+     {
+         getToolkit().beep();
+         evt.consume();
+         JOptionPane.showMessageDialog(this, "Ingrese solo numeros");
+         txtcosto_alojamiento.setCursor(null);
+     }
+     else if((int)evt.getKeyChar()>32 && (int)evt.getKeyChar()<=45
+             ||(int)evt.getKeyChar()>=58 && (int)evt.getKeyChar()<=64
+             || (int)evt.getKeyChar()>=91 && (int)evt.getKeyChar()<=96
+             || (int)evt.getKeyChar()>=123 && (int)evt.getKeyChar()<=255)
+    {
+         getToolkit().beep();
+         evt.consume();
+         JOptionPane.showMessageDialog(this, "Ingrese solo numeros");
+         txtcosto_alojamiento.setCursor(null);
+     }
+    }//GEN-LAST:event_txtcosto_alojamientoKeyTyped
 
     /**
      * @param args the command line arguments
