@@ -465,18 +465,18 @@ public class frmproducto extends javax.swing.JInternalFrame {
     private void btnguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarActionPerformed
         // TODO add your handling code here:
         if (txtnombre.getText().length() == 0) {
-            JOptionPane.showConfirmDialog(rootPane, "Debes ingresar un Nombre para el producto");
+            JOptionPane.showMessageDialog(null,"Debes ingresar un Nombre para el Producto","Validar Nombre del Producto",JOptionPane.INFORMATION_MESSAGE);
             txtnombre.requestFocus();
             return;
         }
         if (txtdescripcion.getText().length() == 0) {
-            JOptionPane.showConfirmDialog(rootPane, "Debes ingresar una descripción para el producto");
+            JOptionPane.showMessageDialog(null,"Debes ingresar una Descripcíon para el Producto","Validar Descripcíon del Producto",JOptionPane.INFORMATION_MESSAGE);
             txtdescripcion.requestFocus();
             return;
         }
 
         if (txtprecio_venta.getText().length() == 0) {
-            JOptionPane.showConfirmDialog(rootPane, "Debes ingresar un precio diario para para la venta del producto");
+           JOptionPane.showMessageDialog(null,"Debes ingresar un precio diario para la venta del Producto","Validar Precio del Producto",JOptionPane.INFORMATION_MESSAGE);
             txtprecio_venta.requestFocus();
             return;
         }

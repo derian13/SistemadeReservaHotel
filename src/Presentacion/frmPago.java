@@ -120,7 +120,7 @@ public class frmPago extends javax.swing.JInternalFrame {
     void habilitar() {
         txtidpago.setVisible(false);
         
-        txtidreserva.setVisible(true);
+        txtidreserva.setEnabled(false);
         txtcliente.setEnabled(true);
         txtnum_comprobante.setEnabled(true);
         cbotipo_comprobante.setEnabled(true);
@@ -130,8 +130,8 @@ public class frmPago extends javax.swing.JInternalFrame {
         dcfecha_emision.setEnabled(true);
         dcfecha_pago.setEnabled(true);
         
-        txtidhabitacion.setVisible(true);
-        txthabitacion.setEnabled(true);
+        txtidhabitacion.setEnabled(false);
+        txthabitacion.setEnabled(false);
          
         btnguardar.setEnabled(true);
         btncancelar.setEnabled(true);
@@ -232,7 +232,7 @@ public class frmPago extends javax.swing.JInternalFrame {
         txtidpago.setBackground(new java.awt.Color(235, 227, 227));
         txtidpago.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
         txtidpago.setForeground(new java.awt.Color(0, 0, 51));
-        txttotal_reserva.add(txtidpago, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 90, 130, -1));
+        txttotal_reserva.add(txtidpago, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 80, 130, -1));
 
         jLabel2.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
         jLabel2.setText("Reserva:");
@@ -246,7 +246,7 @@ public class frmPago extends javax.swing.JInternalFrame {
                 txtidreservaActionPerformed(evt);
             }
         });
-        txttotal_reserva.add(txtidreserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 120, 78, -1));
+        txttotal_reserva.add(txtidreserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 120, 78, -1));
 
         jLabel4.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
         jLabel4.setText("Habitación:");
@@ -321,7 +321,7 @@ public class frmPago extends javax.swing.JInternalFrame {
         txtcliente.setBackground(new java.awt.Color(235, 227, 227));
         txtcliente.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
         txtcliente.setForeground(new java.awt.Color(0, 0, 51));
-        txttotal_reserva.add(txtcliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 120, 170, -1));
+        txttotal_reserva.add(txtcliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 120, 170, -1));
 
         jLabel3.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
         jLabel3.setText("Total Reserva:");
@@ -340,12 +340,12 @@ public class frmPago extends javax.swing.JInternalFrame {
                 txtidhabitacionActionPerformed(evt);
             }
         });
-        txttotal_reserva.add(txtidhabitacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 210, 78, -1));
+        txttotal_reserva.add(txtidhabitacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 210, 78, -1));
 
         txthabitacion.setBackground(new java.awt.Color(235, 227, 227));
         txthabitacion.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
         txthabitacion.setForeground(new java.awt.Color(0, 0, 51));
-        txttotal_reserva.add(txthabitacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 210, 170, -1));
+        txttotal_reserva.add(txthabitacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 210, 170, -1));
 
         jLabel8.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
         jLabel8.setText("Igv:");
@@ -559,18 +559,18 @@ public class frmPago extends javax.swing.JInternalFrame {
     private void btnguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarActionPerformed
         // TODO add your handling code here:
         if (txtigv.getText().length() == 0) {
-            JOptionPane.showConfirmDialog(rootPane, "Debes ingresar el igv del Comprobante de pago a generar");
+            JOptionPane.showMessageDialog(null,"Debe ingresar el igv del comprobante a generar","Validar IGV",JOptionPane.INFORMATION_MESSAGE);
             txtigv.requestFocus();
             return;
         }
         if (txttotal_pago.getText().length() == 0) {
-            JOptionPane.showConfirmDialog(rootPane, "Debes ingresar el total de pago del comprobante");
+            JOptionPane.showMessageDialog(null,"Debe ingresar el total de pago del comprobante","Validar Pago",JOptionPane.INFORMATION_MESSAGE);
             txttotal_pago.requestFocus();
             return;
         }
 
         if (txtnum_comprobante.getText().length() == 0) {
-            JOptionPane.showConfirmDialog(rootPane, "Debes ingresar un Número de Comprobante del Pago");
+            JOptionPane.showMessageDialog(null,"Debe ingresar un numero de comprobante de pago","Validar Numero de comprobante",JOptionPane.INFORMATION_MESSAGE);
             txtnum_comprobante.requestFocus();
             return;
         }

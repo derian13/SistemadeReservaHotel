@@ -562,18 +562,18 @@ public class frmreserva extends javax.swing.JInternalFrame {
     private void btnguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarActionPerformed
         // TODO add your handling code here:
         if (txtidhabitacion.getText().length() == 0) {
-            JOptionPane.showConfirmDialog(rootPane, "Debes Seleccionar una Habitación");
+            JOptionPane.showMessageDialog(null,"Debe seleccionar una Habitacíon","Validar Habitacíon",JOptionPane.INFORMATION_MESSAGE);
             txtidhabitacion.requestFocus();
             return;
         }
         if (txtidcliente.getText().length() == 0) {
-            JOptionPane.showConfirmDialog(rootPane, "Debes Seleccionar un Cliente");
+            JOptionPane.showMessageDialog(null,"Debe seleccionar un Cliente","Validar Cliente",JOptionPane.INFORMATION_MESSAGE);
             txtidcliente.requestFocus();
             return;
         }
 
         if (txtcosto_alojamiento.getText().length() == 0) {
-            JOptionPane.showConfirmDialog(rootPane, "Debes ingresar un precio del Alojamiento");
+            JOptionPane.showMessageDialog(null,"Debe ingresar el precio de alojamiento","Validar Precio de Alojamiento",JOptionPane.INFORMATION_MESSAGE);
             txtcosto_alojamiento.requestFocus();
             return;
         }

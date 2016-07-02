@@ -465,23 +465,23 @@ public class frmhabitacion extends javax.swing.JInternalFrame {
     private void btnguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarActionPerformed
         // TODO add your handling code here:
         if(txtnumero.getText().length()== 0) {
-            JOptionPane.showConfirmDialog(rootPane, "Debes ingresar un Número de Habitación");
+            JOptionPane.showMessageDialog(null,"Debes ingresar un Número de Habitación","Validar Numero de Habitacion",JOptionPane.INFORMATION_MESSAGE);
             txtnumero.requestFocus();
             return;
         }
          if(txtdescripcion.getText().length()== 0) {
-            JOptionPane.showConfirmDialog(rootPane, "Debes ingresar una Descripción para la Habitación");
+            JOptionPane.showMessageDialog(null,"Debes ingresar una Descripcíon para la Habitación","Validar Descripcíon de Habitacion",JOptionPane.INFORMATION_MESSAGE);
             txtdescripcion.requestFocus();
             return;
         }
           if(txtprecio_diario.getText().length()== 0) {
-            JOptionPane.showConfirmDialog(rootPane, "Debes ingresar un Precio Diario para la Habitación");
+            JOptionPane.showMessageDialog(null,"Debes ingresar un precio unitario para la Habitación","Validar Precio de Habitacion",JOptionPane.INFORMATION_MESSAGE);
             txtprecio_diario.requestFocus();
             return;
             
         }
          if(txtcaracteristicas.getText().length()== 0) {
-            JOptionPane.showConfirmDialog(rootPane, "Debes ingresar las Características de la Habitación");
+            JOptionPane.showMessageDialog(null,"Debes ingresar las características de la Habitación","Validar Características de Habitacion",JOptionPane.INFORMATION_MESSAGE);
             txtcaracteristicas.requestFocus();
             return;
         }

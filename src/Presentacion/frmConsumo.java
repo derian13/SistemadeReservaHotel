@@ -413,18 +413,18 @@ public class frmConsumo extends javax.swing.JInternalFrame {
     private void btnguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarActionPerformed
         // TODO add your handling code here:
         if (txtidproducto.getText().length() == 0) {
-            JOptionPane.showConfirmDialog(rootPane, "Debes Seleccionar un producto");
+            JOptionPane.showMessageDialog(null,"Debe ingresar un producto","Validar Producto",JOptionPane.INFORMATION_MESSAGE);
             btnbuscarproducto.requestFocus();
             return;
         }
         if (txtcantidad.getText().length() == 0) {
-            JOptionPane.showConfirmDialog(rootPane, "Debes ingresar una cantidad de consumo");
+            JOptionPane.showMessageDialog(null,"Debe ingresar una cantidad de consumo","Validar Consumo",JOptionPane.INFORMATION_MESSAGE);
             txtcantidad.requestFocus();
             return;
         }
 
         if (txtprecio_venta.getText().length() == 0) {
-            JOptionPane.showConfirmDialog(rootPane, "Debes ingresar un precio de venta del producto");
+            JOptionPane.showMessageDialog(null,"Debe ingresar un precio de venta del producto","Validar Precio",JOptionPane.INFORMATION_MESSAGE);
             txtprecio_venta.requestFocus();
             return;
         }
